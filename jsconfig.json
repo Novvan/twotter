@@ -1,9 +1,12 @@
 {
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "vue.config.js"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "components/*": ["src/components/*"]
     }
+  },
+  "typeAcquisition": {
+    "exclude": ["dotenv"]
   }
 }

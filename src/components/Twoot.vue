@@ -1,5 +1,5 @@
 <template>
-  <div class="twoot" @click="likeTwoot(twoot.id)">
+  <div class="twoot">
     <div class="twoot__user">
       {{ username }}
     </div>
@@ -15,16 +15,11 @@ export default {
   props: {
     twoot: {type: Object, required: true},
     username: {type: String, required: true}
-  },
-  methods: {
-    likeTwoot(id) {
-      this.$emit('liked', id)
-    }
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .twoot {
   background-color: white;
   padding: 20px;
@@ -33,12 +28,13 @@ export default {
   box-sizing: border-box;
   cursor: pointer;
   transition: all 0.25s ease;
-}
-.twoot:hover {
-  transform: scale(1.1, 1.1);
-}
 
-.twoot__user {
-  font-weight: bold;
+  &:hover {
+    transform: scale(1.1, 1.1);
+  }
+
+  .twoot__user {
+    font-weight: bold;
+  }
 }
 </style>
