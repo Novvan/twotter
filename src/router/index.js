@@ -1,8 +1,9 @@
-/* eslint-disable no-unused-vars */
 import {createRouter, createWebHistory} from 'vue-router'
 import UserProfile from '../views/UserProfile.vue'
 import Home from '../views/Home.vue'
 import Admin from '../views/Admin.vue'
+import store from '@/store'
+import {users} from '@/assets/users'
 
 const routes = [
     {
@@ -31,11 +32,21 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, _, next) => {
-    const isAdmin = true
+    let isAdmin = false
+    const user = store.state.UserStore.user
+
+    if (!user) {
+        await store.dispatch('UserStore/setUser', users[0])
+        isAdmin = users[0].isAdmin
+    }
+
     const requiresAdmin = to.matched.some((record) => record.meta.requiresAdmin)
 
-    if (requiresAdmin && !isAdmin) next({name: 'Home'})
-    else next()
+    if (requiresAdmin && !isAdmin) {
+        next({name: 'Home'})
+    } else {
+        next()
+    }
 })
 
 export default router

@@ -6,8 +6,8 @@
                     <h4>Twotter</h4>
                 </div>
             </router-link>
-            <router-link to="/user/1">
-                {{ state.user.username }}
+            <router-link to="/user/" v-if="user">
+                {{ user.username }}
             </router-link>
         </div>
         <router-view />
@@ -15,18 +15,17 @@
 </template>
 
 <script lang="ts">
-import {reactive} from 'vue'
+import {computed, reactive} from 'vue'
+import {useStore} from 'vuex'
 
 export default {
     name: 'App',
     setup() {
-        const state = reactive({
-            user: {
-                username: 'Novvan',
-            },
-        })
+        const store = useStore()
+        const user = computed(() => store.state.UserStore.user)
+        const state = reactive({})
 
-        return {state}
+        return {state, user}
     },
 }
 </script>
