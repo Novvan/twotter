@@ -2,9 +2,11 @@
     <div>
         <div id="nav" class="header">
             <router-link to="/">
-                <h4>Twotter</h4>
+                <div class="logo" to="/">
+                    <h4>Twotter</h4>
+                </div>
             </router-link>
-            <router-link to="/profile">
+            <router-link to="/user/1">
                 {{ state.user.username }}
             </router-link>
         </div>
@@ -31,7 +33,7 @@ export default {
 
 <style lang="scss">
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-family: Poppins, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
@@ -52,15 +54,11 @@ export default {
 }
 
 #nav {
-    padding: 30px;
-
     a {
         font-weight: bold;
         color: #fff;
-
-        &.router-link-exact-active {
-            text-decoration: underline;
-        }
+        text-decoration: none;
     }
+    padding: 30px;
 }
 </style>

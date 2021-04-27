@@ -5,6 +5,7 @@
                 <h3 class="userProfile__username">
                     {{ state.user.username }}
                 </h3>
+                <h3>{{ userId }}</h3>
                 <div v-if="state.user.isAdmin" class="userProfile__adminBadge">
                     Admin
                 </div>
@@ -14,10 +15,7 @@
             </div>
             <NewTwootForm @newTwoot="createNewTwoot" />
         </div>
-        <div
-            v-if="state.user.twoots.length > 0"
-            class="userProfile__twootsWrapper"
-        >
+        <div class="userProfile__twootsWrapper">
             <TwootItem
                 v-for="twoot in latestTwoots"
                 :key="twoot.id"
@@ -29,9 +27,12 @@
 </template>
 
 <script>
-import TwootItem from './Twoot'
-import NewTwootForm from './NewTwootForm'
-import {computed, reactive, watch} from 'vue'
+import {computed, reactive} from 'vue'
+import {useRoute} from 'vue-router'
+
+import TwootItem from '@/components/Twoot'
+import NewTwootForm from '@/components/NewTwootForm'
+import {users} from '@/assets/users'
 
 export default {
     name: 'UserProfile',
@@ -41,46 +42,12 @@ export default {
     },
 
     setup() {
+        const route = useRoute()
+        const userId = computed(() => route.params.userId)
+
         const state = reactive({
             followers: 0,
-            user: {
-                id: 1,
-                username: '@NoVvaN',
-                firstName: 'Ian',
-                lastName: 'Geier',
-                email: 'ian@example.com',
-                loggedIn: true,
-                isAdmin: true,
-                twoots: [
-                    {
-                        id: 1,
-                        data: 'WHAT A FANTASTIC DAY',
-                        likes: 0,
-                    },
-                    {
-                        id: 2,
-                        data: 'New vue app running',
-                        likes: 0,
-                    },
-                    {
-                        id: 3,
-                        data: 'Hello World',
-                        likes: 0,
-                    },
-                    {
-                        id: 4,
-                        data: 'Pedro pascal sucks',
-                        likes: 0,
-                    },
-                ],
-            },
-        })
-
-        //Watch
-        const newFollowers = watch((newFollowerCount, oldFollowerCount) => {
-            if (newFollowerCount > oldFollowerCount) {
-                console.log('Gained a user!')
-            }
+            user: users[userId.value - 1] || users[0],
         })
 
         //Methods
@@ -106,13 +73,14 @@ export default {
 
         return {
             state,
-            newFollowers,
             followUser,
             createNewTwoot,
             fullName,
             latestTwoots,
+            userId,
         }
     },
+
     mounted() {
         this.followUser()
     },
