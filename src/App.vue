@@ -6,7 +6,7 @@
                     <h4>Twotter</h4>
                 </div>
             </router-link>
-            <router-link to="/user/" v-if="user">
+            <router-link v-if="user" to="/user/1">
                 {{ user.username }}
             </router-link>
         </div>
