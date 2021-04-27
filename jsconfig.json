@@ -1,12 +1,15 @@
 {
-  "include": ["./src/**/*", "vue.config.js"],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "components/*": ["src/components/*"]
-    }
-  },
-  "typeAcquisition": {
-    "exclude": ["dotenv"]
-  }
+    "compilerOptions": {
+        "strict": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"],
+            "components/*": ["src/components/*"]
+        },
+        "sourceMap": true
+    },
+    "typeAcquisition": {
+        "exclude": ["dotenv"]
+    },
+    "include": ["./src/**/*", "vue.config.js"]
 }

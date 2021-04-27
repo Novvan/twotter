@@ -1,17 +1,17 @@
 <template>
-  <UserProfile />
+    <UserProfile />
 </template>
 
 <script>
 import UserProfile from '../components/UserProfile'
 
 export default {
-  components: {
-    UserProfile
-  },
-  setup() {
-    return {}
-  }
+    components: {
+        UserProfile,
+    },
+    setup() {
+        return {}
+    },
 }
 </script>
 
